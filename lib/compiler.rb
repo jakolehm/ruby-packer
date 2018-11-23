@@ -857,8 +857,8 @@ class Compiler
     sources = Dir[File.join(@ruby_install_1, '*')]
     @utils.cp_r(sources, @work_dir_inner, preserve: true)
 
-    Dir["#{@work_dir_inner}/**/*.{a,dylib,so,dll,lib}"].each do |thisdl|
-      @utils.rm_f(thisdl)
+    Dir["#{@work_dir_inner}/**/*.{a,dylib,so,dll,lib,bundle}"].each do |thisdl|
+      @utils.rm_f(thisdl) unless thisdl.match?(%r{/ruby.*/extensions})
     end
   end
 
